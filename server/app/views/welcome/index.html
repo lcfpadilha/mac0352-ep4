@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-md-4 box-div">
+      <div class= "box-title-div">
+          Máquina <b> sem </b> o patch
+      </div>
+      <div class="box-content-div">
+        Endereço: <a target="_blank" href="http://35.198.50.107/">http://35.198.50.107/</a>
+        <div class= "btn-attack-death">
+            <button type="button" class="btn btn-danger btn-death">INICIAR ATAQUE!</button>
+        </div>
+      </div>
+  </div>  
+  <div class="col-md-4"></div>
+  <div class="col-md-4 box-div"">
+      <div class= "box-title-div">
+          Máquina <b> com </b> o patch
+      </div>
+      <div class="box-content-div">
+        Endereço: <a target="_blank" href="http://35.198.23.247/">http://35.198.23.247/</a>
+        <div class= "btn-attack">
+            <button type="button" class="btn btn-danger btn-alive">INICIAR ATAQUE!</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".btn-attack-death").on('click', function(){
+      $.ajax({
+        type: "POST",
+        url: "run_exploit",
+        data: jQuery.param({ ip: "35.198.50.107"}) ,
+        authenticity_token: window._token,
+        cache: false,
+        success: function(result){
+          $(".btn-death").toggleClass('btn-danger').addClass('btn-success').text('ATAQUE INICIADO!');
+        }
+     });
+    });
+
+    $(".btn-attack").on('click', function(){
+      $.ajax({
+        type: "POST",
+        url: "run_exploit",
+        data: jQuery.param({ ip: "35.198.23.247"}) ,
+        authenticity_token: window._token,
+        cache: false,
+        success: function(result){
+          $(".btn-alive").toggleClass('btn-danger').addClass('btn-success').text('ATAQUE INICIADO!');
+        }
+     });
+    });
+  });
+</script>
